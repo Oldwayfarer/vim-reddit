@@ -1,0 +1,13 @@
+{
+	"url" : "http://www.reddit.com/.json?feed=bb45834347c9ec7027a0e29c4adffdfe5bdeeb2c&user=erthalion",
+	"data": ["data", "children"],
+	"body": "data",
+	"structure":
+	{
+		"title": "title",
+		"source": "subreddit",
+		"author": "author",
+		"url": "url",
+		"text": "selftext"
+	}
+}
