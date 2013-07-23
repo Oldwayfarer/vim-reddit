@@ -30,11 +30,15 @@ let s:URLMATCH = s:URL_PROTOCOL.s:URL_DOMAIN.'\%(/\%('.s:URL_PATH.'\)\=\)\='
 let s:URLMATCH_HTTPS = s:URL_PROTOCOL_HTTPS.s:URL_DOMAIN.'\%(/\%('.s:URL_PATH.'\)\=\)\='
 let s:URLMATCH_NON_HTTPS = s:URL_PROTOCOL_NON_HTTPS.s:URL_DOMAIN.'\%(/\%('.s:URL_PATH.'\)\=\)\='
 
-function! Reddit()
 
 python << EOF
 import sys, vim
 sys.path.append(vim.eval("g:vim_reddit_root"))
+EOF
+
+function! Reddit()
+
+python << EOF
 
 from reddit import main
 main()
