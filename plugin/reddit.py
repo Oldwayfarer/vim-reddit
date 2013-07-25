@@ -25,6 +25,9 @@ def main():
     # each line is an item in the list. We can loop through them delete
     # them, alter them etc.
     # Here we delete all lines in the current buffer
+
+    vim.command("set modifiable")
+
     del vim.current.buffer[:]
 
     vim.current.buffer[0] = "Reddit front page ☢"
@@ -51,6 +54,8 @@ def main():
 
         if post != posts[-1]:
             vim.current.buffer.append("\n")
+
+    vim.command("set nomodifiable")
 
 
 if __name__ == '__main__':
