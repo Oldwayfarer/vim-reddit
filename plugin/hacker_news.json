@@ -1,0 +1,14 @@
+{
+	"url" : "http://api.ihackernews.com/page",
+    "page_name": "Hacker News",
+	"data": ["items"],
+	"body": "",
+	"structure":
+	{
+		"title": "title",
+		"source": "",
+		"author": "postedBy",
+		"url": "url",
+		"text": ""
+	}
+}

@@ -6,9 +6,7 @@ import simplejson
 
 TIMEOUT = 20
 
-def main():
-
-    config_path = vim.eval("g:vim_reddit_config")
+def load(config_path):
     config = simplejson.loads(open(config_path).read())
 
     # Get the posts and parse the json response
@@ -30,20 +28,24 @@ def main():
 
     del vim.current.buffer[:]
 
-    vim.current.buffer[0] = "Reddit front page ☢"
+    vim.current.buffer[0] = "{} front page ☢".format(config['page_name'])
     vim.current.buffer.append(20*"=" + " ☢")
 
     for post in posts:
-        post_data = post.get(config['body'], {})
+        body_tag = config['body']
         post_struct = config['structure']
+        if body_tag:
+            post_data = post.get(config['body'], {})
+        else:
+            post_data = post
 
         title = post_data.get(post_struct['title'], "NO TITLE").encode("utf-8")
-        source = post_data.get(post_struct['source'], "").encode("utf-8")
-        author = post_data.get(post_struct['source'], "").encode("utf-8")
+        source = post_data.get(post_struct['source'], config['page_name']).encode("utf-8")
+        author = post_data.get(post_struct['author'], "").encode("utf-8")
         url = post_data.get(post_struct['url'], "").encode("utf-8")
-        text = post_data.get(post_struct['text'], None).encode("utf-8")
+        text = post_data.get(post_struct['text'], "").encode("utf-8")
 
-        if text is not None:
+        if text:
             text = text.replace('\n', '')
 
         vim.current.buffer.append("{source} ▶ {title}".format(source=source, title=title))
@@ -59,4 +61,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    load()

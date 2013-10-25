@@ -1,5 +1,6 @@
 {
-	"url" : "http://www.reddit.com/.json",
+	"url" : "http://www.reddit.com/.json?feed=1e8bca9ee4e4e9efd89e7b32c0e9e60ee437e0e1&user=erthalion",
+    "page_name": "Reddit",
 	"data": ["data", "children"],
 	"body": "data",
 	"structure":

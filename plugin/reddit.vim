@@ -13,7 +13,11 @@ if !exists('g:vim_reddit_root') || g:vim_reddit_root == ''
 endif
 
 if !exists('g:vim_reddit_config') || g:vim_reddit_config == ''
-    let g:vim_reddit_config = g:vim_reddit_root."/default.json"
+    let g:vim_reddit_config = g:vim_reddit_root."/reddit.json"
+endif
+
+if !exists('g:vim_hacker_news_config') || g:vim_reddit_config == ''
+    let g:vim_hacker_news_config = g:vim_reddit_root."/hacker_news.json"
 endif
 
 
@@ -22,19 +26,42 @@ import sys, vim
 sys.path.append(vim.eval("g:vim_reddit_root"))
 EOF
 
+function BufferModification()
+    setlocal nomodifiable
+    setlocal buftype=nofile
+    set ft=reddit
+endfunction
+
 function! Reddit()
 
 python << EOF
 
-from reddit import main
-main()
+from reddit import load
+config = vim.eval("g:vim_reddit_config")
+load(config)
 
 EOF
-setlocal nomodifiable
-setlocal buftype=nofile
-set ft=reddit
+
+    call BufferModification()
+endfunction
+
+function! HackerNews()
+
+python << EOF
+
+from reddit import load
+config = vim.eval("g:vim_hacker_news_config")
+load(config)
+
+EOF
+
+    call BufferModification()
 endfunction
 
 if !exists(":Reddit")
     command Reddit :call Reddit()
+endif
+
+if !exists(":HackerNews")
+    command HackerNews :call HackerNews()
 endif
