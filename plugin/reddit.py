@@ -41,7 +41,10 @@ def load(config_path):
 
         title = post_data.get(post_struct['title'], "NO TITLE").encode("utf-8")
         source = post_data.get(post_struct['source'], config['page_name']).encode("utf-8")
-        author = post_data.get(post_struct['author'], "").encode("utf-8")
+        author = post_data.get(post_struct['author'], "")
+        if author:
+            author = author.encode("utf-8")
+
         url = post_data.get(post_struct['url'], "").encode("utf-8")
         text = post_data.get(post_struct['text'], "").encode("utf-8")
 
